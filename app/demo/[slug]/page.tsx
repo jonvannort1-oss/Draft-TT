@@ -38,11 +38,11 @@ export default async function DemoPage(props: PageProps) {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <Link href="/onboard" className="text-sm text-red-200 hover:text-white transition-colors">
+                        <Link href={`/onboard?clinicName=${encodeURIComponent(clinicName)}`} className="text-sm text-red-200 hover:text-white transition-colors">
                             Exit Demo
                         </Link>
                         <Button size="sm" className="bg-white text-red-900 hover:bg-red-50 font-semibold shadow-sm" asChild>
-                            <Link href="/onboard">
+                            <Link href={`/onboard?clinicName=${encodeURIComponent(clinicName)}`}>
                                 Onboard My Clinic <ArrowRight className="w-4 h-4 ml-1" />
                             </Link>
                         </Button>
@@ -110,7 +110,7 @@ export default async function DemoPage(props: PageProps) {
             </div>
 
             {/* Re-using the Hire Me Modal to capture the lead after they play with the demo */}
-            <HireMeModal />
+            <HireMeModal clinicName={clinicName} />
         </main>
     );
 }

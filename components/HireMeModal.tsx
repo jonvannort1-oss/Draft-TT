@@ -7,7 +7,11 @@ import { Button } from "./ui/Button";
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/Card";
 
-export function HireMeModal() {
+interface HireMeModalProps {
+    clinicName?: string;
+}
+
+export function HireMeModal({ clinicName }: HireMeModalProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
@@ -70,7 +74,7 @@ export function HireMeModal() {
                                         </p>
                                         <div className="space-y-3">
                                             <Button className="w-full h-12 text-base font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-lg shadow-emerald-500/20" size="lg" asChild>
-                                                <Link href="/onboard">
+                                                <Link href={clinicName ? `/onboard?clinicName=${encodeURIComponent(clinicName)}` : "/onboard"}>
                                                     I want this for my clinic!
                                                 </Link>
                                             </Button>

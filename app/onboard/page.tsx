@@ -3,11 +3,14 @@
 import { Button } from "@/components/ui/Button";
 import { CheckCircle2, ArrowRight, ShieldCheck, Zap } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export default function OnboardPage() {
+function OnboardForm() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const urlClinicName = searchParams.get("clinicName") || "";
+
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -16,6 +19,13 @@ export default function OnboardPage() {
         clinicName: ""
     });
 
+    // Autofill clinicName from URL on mount
+    useEffect(() => {
+        if (urlClinicName) {
+            setFormData(prev => ({ ...prev, clinicName: urlClinicName }));
+        }
+    }, [urlClinicName]);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.id]: e.target.value });
     };
@@ -23,29 +33,28 @@ export default function OnboardPage() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Format phone number to include +1 as required by GHL
+        // Basic validation check
+        if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.phone.trim() || !formData.clinicName.trim()) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        // Format phone number: Send 1 + 10 digits (e.g. 15551234567) without the + sign.
         let formattedPhone = formData.phone.replace(/\D/g, ""); // Remove non-digits
 
-        // If it's a standard 10-digit US number, add +1
         if (formattedPhone.length === 10) {
-            formattedPhone = `+1${formattedPhone}`;
-        }
-        // If it's 11 digits starting with 1, ensure it has the +
-        else if (formattedPhone.length === 11 && formattedPhone.startsWith("1")) {
-            formattedPhone = `+${formattedPhone}`;
+            formattedPhone = `1${formattedPhone}`;
+        } else if (formattedPhone.length === 11 && formattedPhone.startsWith("1")) {
+            // Already good
         }
 
         // Construct query params
-        // Mapping to standard keys often used by GHL widgets:
-        // first_name, last_name, email, phone, organization/company
         const params = new URLSearchParams({
             first_name: formData.firstName,
             last_name: formData.lastName,
             email: formData.email,
             phone: formattedPhone,
-            // phone_number: formattedPhone, // User said "it is just ?phone", so I'll rely on 'phone'.
-            organization: formData.clinicName, // standard naming guess
-            // Also passing as camelCase just in case custom logic uses it
+            organization: formData.clinicName,
             firstName: formData.firstName,
             lastName: formData.lastName,
             clinicName: formData.clinicName
@@ -56,10 +65,9 @@ export default function OnboardPage() {
 
     return (
         <main className="min-h-screen bg-[#0B0E14] text-white selection:bg-emerald-500/30">
-            {/* Minimal Header */}
             <header className="container mx-auto px-4 py-6 flex items-center justify-between">
                 <Link href="/" className="text-2xl font-bold tracking-tighter">
-                    Zenith
+                    {urlClinicName || "Zenith"}
                 </Link>
             </header>
 
@@ -191,5 +199,13 @@ export default function OnboardPage() {
                 </div>
             </div>
         </main>
+    );
+}
+
+export default function OnboardPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-[#0B0E14]" />}>
+            <OnboardForm />
+        </Suspense>
     );
 }

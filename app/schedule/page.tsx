@@ -11,6 +11,7 @@ export default function SchedulePage() {
 
     // Get user details from URL for potential usage/confirmation
     const firstName = searchParams.get("firstName") || "";
+    const clinicName = searchParams.get("clinicName") || "";
     // Note: The GHL embed script often handles URL params automatically if they match standard keys
     // We are passing them in the URL which is the standard way GHL widgets pick them up.
 
@@ -18,7 +19,7 @@ export default function SchedulePage() {
         <main className="min-h-screen bg-[#0B0E14] text-white selection:bg-emerald-500/30 flex flex-col">
             <header className="container mx-auto px-4 py-6 flex items-center justify-between border-b border-white/5">
                 <Link href="/" className="text-2xl font-bold tracking-tighter">
-                    Zenith
+                    {clinicName || "Zenith"}
                 </Link>
             </header>
 
