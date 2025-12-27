@@ -30,19 +30,19 @@ export default async function DemoPage(props: PageProps) {
             <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-background/80 to-background pointer-events-none" />
 
             {/* Top Banner / Overlay to remind them it's a demo */}
-            <div className="sticky top-0 z-40 bg-indigo-900/95 backdrop-blur-md border-b border-indigo-500/30 text-white px-4 py-3 shadow-xl">
+            <div className="sticky top-0 z-40 bg-red-950/95 backdrop-blur-md border-b border-red-500/30 text-white px-4 py-3 shadow-xl">
                 <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div className="flex items-center gap-2 text-sm font-medium">
-                        <Sparkles className="w-4 h-4 text-indigo-300" />
+                        <Sparkles className="w-4 h-4 text-red-300" />
                         <span>Viewing live demo for <strong>{clinicName}</strong></span>
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <Link href="/" className="text-sm text-indigo-200 hover:text-white transition-colors">
+                        <Link href="/onboard" className="text-sm text-red-200 hover:text-white transition-colors">
                             Exit Demo
                         </Link>
-                        <Button size="sm" className="bg-white text-indigo-900 hover:bg-indigo-50 font-semibold shadow-sm" asChild>
-                            <Link href="/">
+                        <Button size="sm" className="bg-white text-red-900 hover:bg-red-50 font-semibold shadow-sm" asChild>
+                            <Link href="/onboard">
                                 Onboard My Clinic <ArrowRight className="w-4 h-4 ml-1" />
                             </Link>
                         </Button>
@@ -61,17 +61,18 @@ export default async function DemoPage(props: PageProps) {
                         {/* Hand-drawn annotation - Positioned relative to the end of the text */}
                         <div className="absolute left-full top-1/2 -translate-y-1/2 ml-8 hidden md:block rotate-6 whitespace-nowrap z-20">
                             <div className="relative">
-                                {/* Arrow points from right to left. SVG starts at left:0, margin ensures 2rem gap. */}
-                                <svg width="90" height="40" viewBox="0 0 90 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute -left-6 top-3 text-white/90">
-                                    {/* Path starts at x=85 (right) and curves to x=5 (left) */}
-                                    <path d="M85 5 Q 45 25 5 25" stroke="currentColor" strokeWidth="2" strokeLinecap="round" markerEnd="url(#arrowhead)" />
+                                {/* Arrow points from right to left. SVG starts at left:0. */}
+                                <svg width="90" height="40" viewBox="0 0 90 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute -left-4 top-3 text-white/90">
+                                    {/* Adjusted path start point to be higher (y=0) and curve deeper to avoid text */}
+                                    <path d="M85 2 Q 45 28 5 25" stroke="currentColor" strokeWidth="2" strokeLinecap="round" markerEnd="url(#arrowhead)" />
                                     <defs>
                                         <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
                                             <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" />
                                         </marker>
                                     </defs>
                                 </svg>
-                                <span className="font-['Caveat'] text-3xl text-white/90 block relative z-0 pl-10 pt-1">
+                                {/* Increased padding to pl-14 to push text further right away from the stalk */}
+                                <span className="font-['Caveat'] text-3xl text-white/90 block relative z-0 pl-14 pt-1">
                                     Your Logo Here
                                 </span>
                             </div>

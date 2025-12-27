@@ -10,7 +10,7 @@ export function Hero() {
     const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
     return (
-        <section className="relative overflow-hidden pt-20 pb-32 md:pt-32">
+        <section className="relative overflow-hidden pt-20 pb-10 md:pt-32">
             <div className="container px-4 mx-auto text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

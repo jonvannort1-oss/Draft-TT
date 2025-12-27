@@ -11,16 +11,18 @@ const timeSlots = [
     "9:00 AM", "10:30 AM", "1:00 PM", "2:30 PM", "4:00 PM"
 ];
 
-const dates = [
-    { day: "Mon", date: "12" },
-    { day: "Tue", date: "13" },
-    { day: "Wed", date: "14", isActive: true },
-    { day: "Thu", date: "15" },
-    { day: "Fri", date: "16" },
-];
-
 export function MockServiceCalendar() {
     const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
+    const [activeDateIndex, setActiveDateIndex] = useState(2); // Wednesday (index 2) active by default
+
+    // Static dates for demo purposes
+    const dates = [
+        { day: "Mon", date: "12" },
+        { day: "Tue", date: "13" },
+        { day: "Wed", date: "14" },
+        { day: "Thu", date: "15" },
+        { day: "Fri", date: "16" },
+    ];
 
     return (
         <Card className="h-full border-border/50 bg-card/50 backdrop-blur-sm">
@@ -38,9 +40,10 @@ export function MockServiceCalendar() {
                     {dates.map((item, i) => (
                         <div
                             key={i}
+                            onClick={() => setActiveDateIndex(i)}
                             className={cn(
                                 "flex flex-col items-center justify-center w-12 h-14 rounded-xl border border-transparent transition-all cursor-pointer",
-                                item.isActive
+                                i === activeDateIndex
                                     ? "bg-primary text-primary-foreground shadow-lg scale-110"
                                     : "bg-muted/30 hover:bg-muted text-muted-foreground"
                             )}
