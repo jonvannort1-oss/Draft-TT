@@ -23,14 +23,17 @@ export default function OnboardPage() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Workaround for GHL Country Picker:
-        // The widget likely expects a raw 10-digit number if it handles the country code via UI.
-        // We stripped non-digits. If it starts with 1 and is 11 digits, strip the leading 1.
-        let rawPhone = formData.phone.replace(/\D/g, "");
-        if (rawPhone.length === 11 && rawPhone.startsWith("1")) {
-            rawPhone = rawPhone.substring(1);
+        // Format phone number to include +1 as required by GHL
+        let formattedPhone = formData.phone.replace(/\D/g, ""); // Remove non-digits
+
+        // If it's a standard 10-digit US number, add +1
+        if (formattedPhone.length === 10) {
+            formattedPhone = `+1${formattedPhone}`;
         }
-        // If user entered +1..., we took it out above. Now we just ensure we send the 10-digit national number.
+        // If it's 11 digits starting with 1, ensure it has the +
+        else if (formattedPhone.length === 11 && formattedPhone.startsWith("1")) {
+            formattedPhone = `+${formattedPhone}`;
+        }
 
         // Construct query params
         // Mapping to standard keys often used by GHL widgets:
@@ -39,8 +42,8 @@ export default function OnboardPage() {
             first_name: formData.firstName,
             last_name: formData.lastName,
             email: formData.email,
-            phone: rawPhone,
-            phone_number: rawPhone, // Adding alternative key for GHL autofill
+            phone: formattedPhone,
+            // phone_number: formattedPhone, // User said "it is just ?phone", so I'll rely on 'phone'.
             organization: formData.clinicName, // standard naming guess
             // Also passing as camelCase just in case custom logic uses it
             firstName: formData.firstName,
