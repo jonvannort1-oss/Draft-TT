@@ -3,7 +3,7 @@
 import { MockIntakeForm } from "@/components/MockIntakeForm";
 import { MockServiceCalendar } from "@/components/MockServiceCalendar";
 import { Button } from "@/components/ui/Button";
-import { ArrowRight, Sparkles, Leaf, Droplets } from "lucide-react";
+import { ArrowRight, Sparkles, HelpCircle, Sparkle, DollarSign, ClipboardList, Calendar } from "lucide-react";
 import Link from "next/link";
 import { HireMeModal } from "@/components/HireMeModal";
 import Image from "next/image";
@@ -51,17 +51,7 @@ export default function DemoPage() {
 
             {/* Hero Section */}
             <div className="container mx-auto px-4 pt-12 pb-8 relative z-10">
-                <div className="text-center max-w-4xl mx-auto mb-16">
-                    {/* Decorative elements */}
-                    <div className="flex justify-center gap-3 mb-6">
-                        <div className="p-2 rounded-full bg-emerald-500/10 text-emerald-400">
-                            <Leaf className="w-5 h-5" />
-                        </div>
-                        <div className="p-2 rounded-full bg-teal-500/10 text-teal-400">
-                            <Droplets className="w-5 h-5" />
-                        </div>
-                    </div>
-
+                <div className="text-center max-w-4xl mx-auto mb-10">
                     {/* Clinic Name */}
                     <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 tracking-tight">
                         <span className="bg-gradient-to-r from-emerald-200 via-teal-100 to-emerald-100 bg-clip-text text-transparent drop-shadow-lg">
@@ -70,46 +60,40 @@ export default function DemoPage() {
                     </h1>
 
                     {/* Tagline */}
-                    <p className="text-xl md:text-2xl text-emerald-100/80 font-light max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-xl md:text-2xl text-emerald-100/80 font-light max-w-2xl mx-auto leading-relaxed mb-8">
                         Where tranquility meets technology.
                         <span className="block mt-2 text-lg text-emerald-200/60">
                             Book your perfect escape in seconds.
                         </span>
                     </p>
+
+                    {/* Liquid Glass Navigation Bar */}
+                    <div className="inline-flex items-center gap-1 p-1.5 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg">
+                        <a href="#" className="px-4 py-2 rounded-full text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-all flex items-center gap-2">
+                            <ClipboardList className="w-4 h-4" /> Services
+                        </a>
+                        <a href="#" className="px-4 py-2 rounded-full text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-all flex items-center gap-2">
+                            <DollarSign className="w-4 h-4" /> Pricing
+                        </a>
+                        <a href="#" className="px-4 py-2 rounded-full text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-all flex items-center gap-2">
+                            <HelpCircle className="w-4 h-4" /> FAQs
+                        </a>
+                        <a href="#" className="px-4 py-2 rounded-full text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-all flex items-center gap-2">
+                            <Sparkle className="w-4 h-4" /> About
+                        </a>
+                    </div>
                 </div>
 
                 {/* Cards Grid */}
                 <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
                     {/* Column 1: Intake */}
-                    <div className="space-y-6">
-                        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400">
-                                    <Leaf className="w-5 h-5" />
-                                </div>
-                                <h3 className="text-xl font-semibold text-white">New Client Intake</h3>
-                            </div>
-                            <p className="text-emerald-100/70 text-sm mb-6">
-                                Tell us about yourself so we can personalize your experience.
-                            </p>
-                            <MockIntakeForm />
-                        </div>
+                    <div>
+                        <MockIntakeForm />
                     </div>
 
                     {/* Column 2: Booking */}
-                    <div className="space-y-6">
-                        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="p-2 rounded-lg bg-teal-500/20 text-teal-400">
-                                    <Droplets className="w-5 h-5" />
-                                </div>
-                                <h3 className="text-xl font-semibold text-white">Book Your Session</h3>
-                            </div>
-                            <p className="text-emerald-100/70 text-sm mb-6">
-                                Choose a time that works best for your schedule.
-                            </p>
-                            <MockServiceCalendar />
-                        </div>
+                    <div>
+                        <MockServiceCalendar />
                     </div>
                 </div>
 
