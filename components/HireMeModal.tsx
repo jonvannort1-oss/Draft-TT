@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Code2, Rocket } from "lucide-react";
 import { Button } from "./ui/Button";
+import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/Card";
 
 export function HireMeModal() {
@@ -68,8 +69,10 @@ export function HireMeModal() {
                                             This entire demo, plus customized patient experience upgrades and follow-ups can be running for your business in less than a week.
                                         </p>
                                         <div className="space-y-3">
-                                            <Button className="w-full h-12 text-base font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-lg shadow-emerald-500/20" size="lg">
-                                                I want this for my clinic!
+                                            <Button className="w-full h-12 text-base font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-lg shadow-emerald-500/20" size="lg" asChild>
+                                                <Link href="/onboard">
+                                                    I want this for my clinic!
+                                                </Link>
                                             </Button>
                                             <Button
                                                 variant="ghost"
