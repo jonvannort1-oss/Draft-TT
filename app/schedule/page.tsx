@@ -19,7 +19,7 @@ export default function SchedulePage() {
         <main className="min-h-screen bg-[#0B0E14] text-white selection:bg-emerald-500/30 flex flex-col">
             <header className="container mx-auto px-4 py-6 flex items-center justify-between border-b border-white/5">
                 <Link href="/" className="text-2xl font-bold tracking-tighter">
-                    {clinicName || "Zenith"}
+                    {clinicName || "TrueTrend Media"}
                 </Link>
             </header>
 

@@ -61,7 +61,7 @@ export default function DemoPage() {
 
                     {/* Tagline */}
                     <p className="text-xl md:text-2xl text-emerald-100/80 font-light max-w-2xl mx-auto leading-relaxed mb-8">
-                        Where tranquility meets technology.
+                        Your City's Premiere Massage & Wellness Clinic.
                         <span className="block mt-2 text-lg text-emerald-200/60">
                             Book your perfect escape in seconds.
                         </span>

@@ -27,7 +27,7 @@ export function MockIntakeForm() {
                     <div className="p-2 rounded-lg bg-primary/10 text-primary">
                         <ClipboardList className="w-5 h-5" />
                     </div>
-                    <CardTitle className="text-xl">New Client Intake</CardTitle>
+                    <CardTitle className="text-xl">Tell Us About Yourself</CardTitle>
                 </div>
             </CardHeader>
             <CardContent>
@@ -43,7 +43,7 @@ export function MockIntakeForm() {
                             </div>
                             <h3 className="text-xl font-semibold mb-2 text-emerald-500">All Set!</h3>
                             <p className="text-muted-foreground">
-                                Your intake form has been securely filed. See you soon!
+                                Your intake form has been securely filed. Now pick a time that works for you! →
                             </p>
                             <Button
                                 variant="outline"

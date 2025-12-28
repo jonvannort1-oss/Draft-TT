@@ -67,7 +67,7 @@ function OnboardForm() {
         <main className="min-h-screen bg-[#0B0E14] text-white selection:bg-emerald-500/30">
             <header className="container mx-auto px-4 py-6 flex items-center justify-between">
                 <Link href="/" className="text-2xl font-bold tracking-tighter">
-                    {urlClinicName || "Zenith"}
+                    {urlClinicName || "TrueTrend Media"}
                 </Link>
             </header>
 
@@ -81,7 +81,7 @@ function OnboardForm() {
                                 Ready to <span className="text-emerald-400">Automate</span> Your Clinic?
                             </h1>
                             <p className="text-xl text-muted-foreground">
-                                Join the top 1% of clinics using AI to book appointments 24/7. Setup takes less than 24 hours.
+                                Join the top 1% of clinics using Automated tools to book more appointments and generate rave reviews on autopilot.
                             </p>
                         </div>
 
