@@ -62,7 +62,7 @@ export function DemoEntryModal({ isOpen, onClose }: DemoEntryModalProps) {
                             </CardHeader>
 
                             <CardContent>
-                                <p className="text-center text-muted-foreground mb-6">
+                                <p className="text-center text-gray-300 mb-6">
                                     Enter your clinic's name to see how our system would look for your brand.
                                 </p>
 

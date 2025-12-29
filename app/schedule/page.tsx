@@ -17,22 +17,30 @@ export default function SchedulePage() {
 
     return (
         <main className="min-h-screen bg-[#0B0E14] text-white selection:bg-emerald-500/30 flex flex-col">
-            <header className="container mx-auto px-4 py-6 flex items-center justify-between border-b border-white/5">
-                <Link href="/" className="text-2xl font-bold tracking-tighter">
-                    {clinicName || "TrueTrend Media"}
-                </Link>
-            </header>
-
-            <div className="flex-1 container mx-auto px-4 py-12 max-w-4xl">
-                <div className="text-center mb-10 space-y-4">
+            <div className="flex-1 container mx-auto px-4 py-8 max-w-4xl">
+                <div className="text-center mb-10 space-y-5">
                     <div className="inline-flex items-center justify-center p-3 rounded-full bg-emerald-500/10 text-emerald-500 mb-4">
                         <CheckCircle2 className="w-8 h-8" />
                     </div>
-                    <h1 className="text-3xl md:text-5xl font-bold">You're One Step Away</h1>
-                    <p className="text-xl text-muted-foreground">
-                        Select a time below to finalize your clinic's automation setup.
-                        {firstName && <span className="block mt-2 text-emerald-400">Welcome, {firstName}!</span>}
-                    </p>
+                    <h1 className="text-3xl md:text-5xl font-bold leading-tight">
+                        {firstName ? `${firstName}, You're` : "You're"} Almost There
+                    </h1>
+                    <div className="max-w-3xl mx-auto space-y-4">
+                        <p className="text-xl md:text-2xl text-gray-200 leading-relaxed">
+                            In less than 7 days, <span className="text-emerald-400 font-semibold">{clinicName || "your clinic"}</span> could have a beautiful, fully automated booking and follow-up system.
+                        </p>
+                        <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+                            The best part? It installs seamlessly alongside your existing tools and EMR systems.
+                        </p>
+                        <p className="text-base md:text-lg text-gray-400 leading-relaxed">
+                            No gimmicks. No robots calling your clients. Just a seamless and unforgettable experience.
+                        </p>
+                        <div className="pt-2">
+                            <p className="text-lg md:text-xl text-emerald-400 font-semibold">
+                                Book your setup call below. Let's do this. 🚀
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="w-full bg-white rounded-xl overflow-hidden shadow-2xl min-h-[700px]">

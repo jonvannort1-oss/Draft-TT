@@ -29,18 +29,18 @@ export default function DemoPage() {
             </div>
 
             {/* Top Banner - Demo Indicator */}
-            <div className="sticky top-0 z-50 bg-emerald-900/90 backdrop-blur-md border-b border-emerald-500/30 text-white px-4 py-3 shadow-xl">
+            <div className="sticky top-0 z-50 bg-red-900/70 backdrop-blur-xl border-b border-red-400/30 text-white px-4 py-3 shadow-2xl shadow-red-900/20">
                 <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div className="flex items-center gap-2 text-sm font-medium">
-                        <Sparkles className="w-4 h-4 text-emerald-300" />
+                        <Sparkles className="w-4 h-4 text-red-300" />
                         <span>Preview for <strong>{clinicName}</strong></span>
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <Link href={`/onboard?clinicName=${encodeURIComponent(clinicName)}`} className="text-sm text-emerald-200 hover:text-white transition-colors">
+                        <Link href={`/onboard?clinicName=${encodeURIComponent(clinicName)}`} className="text-sm text-red-200 hover:text-white transition-colors">
                             Exit Preview
                         </Link>
-                        <Button size="sm" className="bg-white text-emerald-900 hover:bg-emerald-50 font-semibold shadow-sm" asChild>
+                        <Button size="sm" className="bg-white text-red-900 hover:bg-red-50 font-semibold shadow-sm" asChild>
                             <Link href={`/onboard?clinicName=${encodeURIComponent(clinicName)}`}>
                                 Get This for My Clinic <ArrowRight className="w-4 h-4 ml-1" />
                             </Link>
@@ -69,17 +69,26 @@ export default function DemoPage() {
 
                     {/* Liquid Glass Navigation Bar */}
                     <div className="inline-flex items-center gap-1 p-1.5 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg">
-                        <a href="#" className="px-4 py-2 rounded-full text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-all flex items-center gap-2">
+                        <a
+                            href="#"
+                            onClick={(e) => { e.preventDefault(); alert(`${clinicName}'s Services`); }}
+                            className="px-4 py-2 rounded-full text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-all flex items-center gap-2"
+                        >
                             <ClipboardList className="w-4 h-4" /> Services
                         </a>
-                        <a href="#" className="px-4 py-2 rounded-full text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-all flex items-center gap-2">
+                        <a
+                            href="#"
+                            onClick={(e) => { e.preventDefault(); alert(`${clinicName}'s Pricing`); }}
+                            className="px-4 py-2 rounded-full text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-all flex items-center gap-2"
+                        >
                             <DollarSign className="w-4 h-4" /> Pricing
                         </a>
-                        <a href="#" className="px-4 py-2 rounded-full text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-all flex items-center gap-2">
-                            <HelpCircle className="w-4 h-4" /> FAQs
-                        </a>
-                        <a href="#" className="px-4 py-2 rounded-full text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-all flex items-center gap-2">
-                            <Sparkle className="w-4 h-4" /> About
+                        <a
+                            href="#"
+                            onClick={(e) => { e.preventDefault(); alert(`${clinicName}'s About/FAQ`); }}
+                            className="px-4 py-2 rounded-full text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-all flex items-center gap-2"
+                        >
+                            <HelpCircle className="w-4 h-4" /> About/FAQ
                         </a>
                     </div>
                 </div>
@@ -100,9 +109,9 @@ export default function DemoPage() {
                 {/* Bottom CTA */}
                 <div className="text-center mt-16">
                     <p className="text-emerald-200/60 text-sm mb-4">Ready to bring this experience to your clients?</p>
-                    <Button size="lg" className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-lg shadow-emerald-500/20" asChild>
+                    <Button size="lg" className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-lg shadow-emerald-500/20 text-gray-50" asChild>
                         <Link href={`/onboard?clinicName=${encodeURIComponent(clinicName)}`}>
-                            Automate My Clinic <ArrowRight className="w-5 h-5 ml-2" />
+                            Automate My Clinic <ArrowRight className="w-5 h-5 ml-2 text-gray-50" />
                         </Link>
                     </Button>
                 </div>

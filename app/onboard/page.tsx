@@ -12,22 +12,61 @@ function OnboardForm() {
     const urlClinicName = searchParams.get("clinicName") || "";
 
     const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
-        phone: "",
-        email: "",
-        clinicName: ""
+        firstName: '',
+        lastName: '',
+        clinicName: urlClinicName || '',
+        email: '',
+        phone: ''
     });
 
-    // Autofill clinicName from URL on mount
-    useEffect(() => {
-        if (urlClinicName) {
-            setFormData(prev => ({ ...prev, clinicName: urlClinicName }));
+    const [emailWarning, setEmailWarning] = useState('');
+
+    // Common email typos
+    const emailTypos: Record<string, string> = {
+        'gmial.com': 'gmail.com',
+        'gmai.com': 'gmail.com',
+        'gmil.com': 'gmail.com',
+        'hitmail.com': 'hotmail.com',
+        'hotmial.com': 'hotmail.com',
+        'yaho.com': 'yahoo.com',
+        'yahooo.com': 'yahoo.com',
+        'outlok.com': 'outlook.com',
+        'outloo.com': 'outlook.com',
+    };
+
+    // Validate email and check for typos
+    const validateEmail = (email: string) => {
+        const domain = email.split('@')[1]?.toLowerCase();
+        if (!domain) return;
+
+        // Check for common typos
+        for (const [typo, correct] of Object.entries(emailTypos)) {
+            if (domain === typo) {
+                setEmailWarning(`Did you mean @${correct}?`);
+                return;
+            }
         }
-    }, [urlClinicName]);
+        setEmailWarning('');
+    };
+
+    // Format phone number as (###) ###-####
+    const formatPhoneNumber = (value: string) => {
+        const cleaned = value.replace(/\D/g, '').slice(0, 10); // Only digits, max 10
+        if (cleaned.length <= 3) return cleaned;
+        if (cleaned.length <= 6) return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3)}`;
+        return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+    };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({ ...formData, [e.target.id]: e.target.value });
+        const { id, value } = e.target;
+        if (id === 'phone') {
+            setFormData(prev => ({ ...prev, [id]: formatPhoneNumber(value) }));
+        } else if (id === 'email') {
+            setFormData(prev => ({ ...prev, [id]: value }));
+            validateEmail(value);
+        } else {
+            setFormData(prev => ({ ...prev, [id]: value }));
+        }
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -65,34 +104,32 @@ function OnboardForm() {
 
     return (
         <main className="min-h-screen bg-[#0B0E14] text-white selection:bg-emerald-500/30">
-            <header className="container mx-auto px-4 py-6 flex items-center justify-between">
-                <Link href="/" className="text-2xl font-bold tracking-tighter">
-                    {urlClinicName || "TrueTrend Media"}
-                </Link>
+            <header className="container mx-auto px-4 py-4">
+                {/* Empty header for cleaner look */}
             </header>
 
-            <div className="container mx-auto px-4 py-8 md:py-24 max-w-6xl">
+            <div className="container mx-auto px-4 py-4 md:py-12 max-w-6xl">
                 <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-start">
 
                     {/* Left Column: Value Prop */}
                     <div className="space-y-8">
                         <div className="space-y-4">
-                            <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
-                                Ready to <span className="text-emerald-400">Automate</span> Your Clinic?
+                            <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
+                                Ready to Fill <span className="text-emerald-400">{urlClinicName ? `${urlClinicName}'s` : "Your"} Calendar</span> & Get More Reviews?
                             </h1>
-                            <p className="text-xl text-muted-foreground">
-                                Join the top 1% of clinics using Automated tools to book more appointments and generate rave reviews on autopilot.
+                            <p className="text-lg md:text-xl text-muted-foreground">
+                                A professional booking experience that works 24/7, so you never miss an appointment.
                             </p>
                         </div>
 
                         <div className="space-y-6">
                             <div className="flex gap-4">
-                                <div className="p-3 rounded-lg bg-emerald-500/10 text-emerald-400 h-fit">
+                                <div className="p-3 rounded-lg bg-emerald-500/10 text-emerald-400 h-fit flex-shrink-0">
                                     <Zap className="w-6 h-6" />
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-white text-lg">Instant setup</h3>
-                                    <p className="text-muted-foreground">We handle the technical integration with your existing tools.</p>
+                                    <h3 className="font-semibold text-white text-lg">Setup in Less Than 7 Days</h3>
+                                    <p className="text-muted-foreground">Full integration with your existing tools, Jane App, Google Calendar, and more.</p>
                                 </div>
                             </div>
                             <div className="flex gap-4">
@@ -100,8 +137,8 @@ function OnboardForm() {
                                     <ShieldCheck className="w-6 h-6" />
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-white text-lg">Risk-Free Pilot</h3>
-                                    <p className="text-muted-foreground">Try it for 30 days. If you don't save 10+ hours, you don't pay.</p>
+                                    <h3 className="font-semibold text-white text-lg">Free Strategy Session</h3>
+                                    <p className="text-muted-foreground">Book a call and we'll create a custom plan based on your current tools and goals.</p>
                                 </div>
                             </div>
                         </div>
@@ -172,6 +209,11 @@ function OnboardForm() {
                                     className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all placeholder:text-white/20"
                                     placeholder="jane@clinic.com"
                                 />
+                                {emailWarning && (
+                                    <p className="text-sm text-yellow-400 flex items-center gap-1">
+                                        ⚠️ {emailWarning}
+                                    </p>
+                                )}
                             </div>
 
                             <div className="space-y-2">
