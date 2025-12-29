@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle2, Calendar, MessageSquare, Zap, Phone } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { DemoEntryModal } from "@/components/DemoEntryModal";
 
-export default function WelcomePage() {
+function WelcomePageContent() {
     const searchParams = useSearchParams();
     const firstName = searchParams.get("firstName") || "";
     const [showModal, setShowModal] = useState(false);
@@ -125,5 +125,13 @@ export default function WelcomePage() {
                 onClose={() => setShowModal(false)}
             />
         </main>
+    );
+}
+
+export default function WelcomePage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-[#0B0E14]" />}>
+            <WelcomePageContent />
+        </Suspense>
     );
 }
