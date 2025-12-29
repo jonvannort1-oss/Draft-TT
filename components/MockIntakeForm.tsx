@@ -142,30 +142,48 @@ export function MockIntakeForm() {
                                             max="5"
                                             value={pressure}
                                             onChange={(e) => setPressure(Number(e.target.value))}
-                                    <div className="flex justify-between text-xs">
-                                            <span className="text-emerald-400 font-medium">Light</span>
-                                            <span className="text-yellow-400 font-medium">Medium</span>
-                                            <span className="text-red-400 font-medium">Deep</span>
-                                        </div>
-                                        <p className="text-center text-sm text-muted-foreground">
-                                            Selected: <span className="font-semibold" style={{ color: getPressureColor(pressure) }}>
-                                                {pressure === 1 ? 'Very Light' : pressure === 2 ? 'Light' : pressure === 3 ? 'Medium' : pressure === 4 ? 'Firm' : 'Deep Tissue'}
-                                            </span>
-                                        </p>
+                                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                                            style={{ WebkitAppearance: 'none' }}
+                                        />
                                     </div>
-                                </div>
 
-                                <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-gray-50" disabled={isSubmitting}>
-                                    {isSubmitting ? (
-                                        <>
-                                            <Loader2 className="mr-2 h-4 w-4 animate-spin text-gray-50" /> Processing...
-                                        </>
-                                    ) : (
-                                        <>
-                                            Submit Intake <Send className="ml-2 w-4 h-4 text-gray-50" />
-                                        </>
-                                    )}
-                                </Button>
+                                    {/* Visible custom thumb */}
+                                    <div className="relative -mt-5 pointer-events-none">
+                                        <div
+                                            className="absolute w-6 h-6 rounded-full bg-white/90 backdrop-blur-md border-2 transition-all duration-300 shadow-lg"
+                                            style={{
+                                                left: `calc(${((pressure - 1) / 4) * 100}% - 12px)`,
+                                                top: '-4px',
+                                                borderColor: getPressureColor(pressure),
+                                                boxShadow: `0 0 12px ${getPressureColor(pressure)}40`,
+                                            }}
+                                        />
+                                    </div>
+
+                                    <div className="flex justify-between text-xs text-muted-foreground pt-1">
+                                        <span className="text-emerald-400 font-medium">Light</span>
+                                        <span className="text-yellow-400 font-medium">Medium</span>
+                                        <span className="text-red-400 font-medium">Deep</span>
+                                    </div>
+                                    <p className="text-center text-sm text-muted-foreground">
+                                        Selected: <span className="font-semibold" style={{ color: getPressureColor(pressure) }}>
+                                            {pressure === 1 ? 'Very Light' : pressure === 2 ? 'Light' : pressure === 3 ? 'Medium' : pressure === 4 ? 'Firm' : 'Deep Tissue'}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-gray-50" disabled={isSubmitting}>
+                                {isSubmitting ? (
+                                    <>
+                                        <Loader2 className="mr-2 h-4 w-4 animate-spin text-gray-50" /> Processing...
+                                    </>
+                                ) : (
+                                    <>
+                                        Submit Intake <Send className="ml-2 w-4 h-4 text-gray-50" />
+                                    </>
+                                )}
+                            </Button>
                         </motion.form>
                     )}
                 </AnimatePresence>
