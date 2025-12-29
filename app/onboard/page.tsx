@@ -103,7 +103,7 @@ function OnboardForm() {
     };
 
     return (
-        <main className="min-h-screen bg-[#0B0E14] text-white selection:bg-emerald-500/30">
+        <main className="min-h-screen bg-[#0B0E14] text-white selection:bg-emerald-500/30 overflow-x-hidden">
             <header className="container mx-auto px-4 py-4">
                 {/* Empty header for cleaner look */}
             </header>
