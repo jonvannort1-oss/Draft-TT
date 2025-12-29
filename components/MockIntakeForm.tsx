@@ -126,7 +126,7 @@ export function MockIntakeForm() {
                                     </div>
 
                                     {/* Slider track and knob */}
-                                    <div className="relative py-2">
+                                    <div className="relative py-3">
                                         <div className="relative h-3 rounded-full overflow-hidden bg-white/10">
                                             {/* Filled portion */}
                                             <div
@@ -139,9 +139,9 @@ export function MockIntakeForm() {
 
                                         {/* Knob */}
                                         <div
-                                            className="absolute top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white border-3 border-emerald-500 shadow-lg transition-all duration-200 pointer-events-none"
+                                            className="absolute top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white border-3 border-emerald-500 shadow-lg transition-all duration-200 pointer-events-none"
                                             style={{
-                                                left: `calc(${((pressure - 1) / 4) * 100}% - 14px)`,
+                                                left: `calc(${((pressure - 1) / 4) * 100}% - 16px)`,
                                             }}
                                         />
 
@@ -156,8 +156,8 @@ export function MockIntakeForm() {
                                             style={{
                                                 WebkitAppearance: 'none',
                                                 touchAction: 'none',
-                                                height: '40px',
-                                                top: '-12px',
+                                                height: '60px',
+                                                top: '-24px',
                                             }}
                                         />
                                     </div>
