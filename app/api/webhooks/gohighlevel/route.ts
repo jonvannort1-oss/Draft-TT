@@ -58,10 +58,3 @@ async function handleAppointmentEvent(data: unknown) {
     // TODO: Trigger appointment sync to Jane App
     console.log('Appointment event:', data);
 }
-
-// Disable body parsing for webhook verification
-export const config = {
-    api: {
-        bodyParser: true,
-    },
-};

@@ -1,11 +1,11 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, Suspense } from "react";
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 
-export default function SchedulePage() {
+function SchedulePageContent() {
     const searchParams = useSearchParams();
     const iframeRef = useRef<HTMLIFrameElement>(null);
 
@@ -55,5 +55,13 @@ export default function SchedulePage() {
                 </div>
             </div>
         </main>
+    );
+}
+
+export default function SchedulePage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-[#0B0E14] flex items-center justify-center text-white">Loading...</div>}>
+            <SchedulePageContent />
+        </Suspense>
     );
 }
