@@ -64,7 +64,7 @@ export class SyncEngine {
     /**
      * Sync contacts from GoHighLevel to Jane App
      */
-    async syncContactsToJane() {
+    async syncContactsToJane(): Promise<{ success: boolean; synced?: number; error?: unknown }> {
         try {
             const { contacts } = await this.ghlContacts.searchContacts({
                 locationId: this.config.ghlLocationId,
@@ -104,7 +104,7 @@ export class SyncEngine {
     /**
      * Sync patients from Jane App to GoHighLevel
      */
-    async syncPatientsToGHL() {
+    async syncPatientsToGHL(): Promise<{ success: boolean; synced?: number; error?: unknown }> {
         try {
             const { patients } = await this.janePatients.getPatients({ limit: 100 });
 
@@ -146,8 +146,8 @@ export class SyncEngine {
      */
     async performFullSync() {
         const results = {
-            contactsToJane: { success: false, synced: 0 },
-            patientsToGHL: { success: false, synced: 0 },
+            contactsToJane: { success: false, synced: undefined as number | undefined },
+            patientsToGHL: { success: false, synced: undefined as number | undefined },
         };
 
         if (
