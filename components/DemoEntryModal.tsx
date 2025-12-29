@@ -40,7 +40,7 @@ export function DemoEntryModal({ isOpen, onClose }: DemoEntryModalProps) {
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-4 z-50"
+                        className="fixed left-1/2 top-8 sm:top-16 -translate-x-1/2 w-full max-w-md px-4 z-50"
                     >
                         <Card className="border-emerald-500/20 bg-card shadow-2xl relative overflow-hidden">
                             {/* Decorative background gradient */}
@@ -54,14 +54,14 @@ export function DemoEntryModal({ isOpen, onClose }: DemoEntryModalProps) {
                                 <span className="sr-only">Close</span>
                             </button>
 
-                            <CardHeader className="text-center pb-2">
+                            <CardHeader className="text-center pb-2 pt-6">
                                 <div className="mx-auto w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center mb-2">
                                     <Building2 className="w-6 h-6 text-emerald-500" />
                                 </div>
                                 <CardTitle className="text-2xl">Personalize Your Demo</CardTitle>
                             </CardHeader>
 
-                            <CardContent>
+                            <CardContent className="pb-6">
                                 <p className="text-center text-gray-300 mb-6">
                                     Enter your clinic's name to see how our system would look for your brand.
                                 </p>
@@ -79,10 +79,10 @@ export function DemoEntryModal({ isOpen, onClose }: DemoEntryModalProps) {
                                     </div>
                                     <Button
                                         type="submit"
-                                        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                                        className="w-full bg-emerald-600 hover:bg-emerald-700 text-gray-50"
                                         disabled={!clinicName.trim()}
                                     >
-                                        Generate Demo <ArrowRight className="ml-2 w-4 h-4" />
+                                        See Your Demo <ArrowRight className="ml-2 w-4 h-4" />
                                     </Button>
                                 </form>
                             </CardContent>
