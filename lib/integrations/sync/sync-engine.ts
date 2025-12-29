@@ -145,9 +145,12 @@ export class SyncEngine {
      * Full sync based on configuration
      */
     async performFullSync() {
-        const results = {
-            contactsToJane: { success: false, synced: undefined as number | undefined },
-            patientsToGHL: { success: false, synced: undefined as number | undefined },
+        const results: {
+            contactsToJane: { success: boolean; synced?: number; error?: unknown };
+            patientsToGHL: { success: boolean; synced?: number; error?: unknown };
+        } = {
+            contactsToJane: { success: false },
+            patientsToGHL: { success: false },
         };
 
         if (
