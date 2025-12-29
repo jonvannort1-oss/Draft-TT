@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ClipboardList, Send, Loader2, User2, Activity } from "lucide-react";
+import { Check, ClipboardList, Send, Loader2, User2, Activity, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "./ui/Button";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/Card";
 
@@ -116,56 +116,52 @@ export function MockIntakeForm() {
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-sm font-medium">Massage Pressure Preference</label>
+                                <label className="text-sm font-medium">Pressure Preference</label>
                                 <div className="space-y-4 p-6 rounded-lg border border-input bg-background/50">
-                                    {/* Labels above slider */}
-                                    <div className="flex justify-between text-sm text-muted-foreground">
-                                        <span>Light</span>
-                                        <span>Medium</span>
-                                        <span>Deep</span>
-                                    </div>
+                                    {/* Arrow buttons and bar */}
+                                    <div className="flex items-center gap-3">
+                                        {/* Decrease button */}
+                                        <button
+                                            type="button"
+                                            onClick={() => setPressure(Math.max(1, pressure - 1))}
+                                            disabled={pressure === 1}
+                                            className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center"
+                                        >
+                                            <ChevronLeft className="w-5 h-5" />
+                                        </button>
 
-                                    {/* Slider track and knob */}
-                                    <div className="relative py-3">
-                                        <div className="relative h-3 rounded-full overflow-hidden bg-white/10">
-                                            {/* Filled portion */}
+                                        {/* Progress bar */}
+                                        <div className="flex-1 relative h-3 rounded-full overflow-hidden bg-white/10">
                                             <div
-                                                className="absolute left-0 top-0 h-full transition-all duration-200 bg-emerald-500"
+                                                className="absolute left-0 top-0 h-full transition-all duration-300 bg-emerald-500"
                                                 style={{
-                                                    width: `${((pressure - 1) / 4) * 100}%`,
+                                                    width: `${(pressure / 5) * 100}%`,
                                                 }}
                                             />
                                         </div>
 
-                                        {/* Knob */}
-                                        <div
-                                            className="absolute top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white border-3 border-emerald-500 shadow-lg transition-all duration-200 pointer-events-none"
-                                            style={{
-                                                left: `calc(${((pressure - 1) / 4) * 100}% - 16px)`,
-                                            }}
-                                        />
+                                        {/* Increase button */}
+                                        <button
+                                            type="button"
+                                            onClick={() => setPressure(Math.min(5, pressure + 1))}
+                                            disabled={pressure === 5}
+                                            className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center"
+                                        >
+                                            <ChevronRight className="w-5 h-5" />
+                                        </button>
+                                    </div>
 
-                                        {/* Actual input */}
-                                        <input
-                                            type="range"
-                                            min="1"
-                                            max="5"
-                                            value={pressure}
-                                            onChange={(e) => setPressure(Number(e.target.value))}
-                                            className="absolute inset-0 w-full opacity-0 cursor-pointer"
-                                            style={{
-                                                WebkitAppearance: 'none',
-                                                touchAction: 'none',
-                                                height: '60px',
-                                                top: '-24px',
-                                            }}
-                                        />
+                                    {/* Labels */}
+                                    <div className="flex justify-between text-xs text-muted-foreground px-1">
+                                        <span>Relaxation</span>
+                                        <span>Therapeutic</span>
+                                        <span>Deep Tissue</span>
                                     </div>
 
                                     {/* Selected value */}
                                     <p className="text-center text-sm text-muted-foreground">
                                         Selected: <span className="font-semibold text-white">
-                                            {pressure === 1 ? 'Very Light' : pressure === 2 ? 'Light' : pressure === 3 ? 'Medium' : pressure === 4 ? 'Firm' : 'Deep Tissue'}
+                                            {pressure === 1 ? 'Relaxation' : pressure === 2 ? 'Light Therapeutic' : pressure === 3 ? 'Therapeutic' : pressure === 4 ? 'Firm' : 'Deep Tissue'}
                                         </span>
                                     </p>
                                 </div>
