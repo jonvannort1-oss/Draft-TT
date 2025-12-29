@@ -115,23 +115,18 @@ export function MockIntakeForm() {
                                 </div>
                             </div>
 
-                            <div className="space-y-3 p-4 rounded-lg border border-input bg-background/50 backdrop-blur-sm">
-                                <label className="text-sm font-medium flex items-center gap-2">
-                                    <span className="w-4 h-4 text-emerald-500">💆</span>
-                                    Massage Pressure Preference
-                                </label>
-                                <div className="space-y-3 pt-2">
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium">Massage Pressure Preference</label>
+                                <div className="space-y-4 p-4 rounded-lg border border-input bg-background/50">
                                     <div className="relative h-2 rounded-full overflow-hidden">
-                                        {/* Background track with glass effect */}
-                                        <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
+                                        {/* Background track */}
+                                        <div className="absolute inset-0 bg-white/10" />
 
-                                        {/* Filled portion with toned-down glass color */}
+                                        {/* Filled portion */}
                                         <div
-                                            className="absolute left-0 top-0 h-full transition-all duration-300 backdrop-blur-sm"
+                                            className="absolute left-0 top-0 h-full transition-all duration-300 bg-emerald-500/60"
                                             style={{
                                                 width: `${((pressure - 1) / 4) * 100}%`,
-                                                backgroundColor: getPressureColor(pressure),
-                                                opacity: 0.7,
                                             }}
                                         />
 
@@ -150,23 +145,21 @@ export function MockIntakeForm() {
                                     {/* Visible custom thumb */}
                                     <div className="relative -mt-5 pointer-events-none">
                                         <div
-                                            className="absolute w-6 h-6 rounded-full bg-white/90 backdrop-blur-md border-2 transition-all duration-300 shadow-lg"
+                                            className="absolute w-6 h-6 rounded-full bg-white border-2 border-emerald-500 transition-all duration-300 shadow-lg"
                                             style={{
                                                 left: `calc(${((pressure - 1) / 4) * 100}% - 12px)`,
                                                 top: '-4px',
-                                                borderColor: getPressureColor(pressure),
-                                                boxShadow: `0 0 12px ${getPressureColor(pressure)}40`,
                                             }}
                                         />
                                     </div>
 
                                     <div className="flex justify-between text-xs text-muted-foreground pt-1">
-                                        <span className="text-emerald-400 font-medium">Light</span>
-                                        <span className="text-yellow-400 font-medium">Medium</span>
-                                        <span className="text-red-400 font-medium">Deep</span>
+                                        <span>Light</span>
+                                        <span>Medium</span>
+                                        <span>Deep</span>
                                     </div>
                                     <p className="text-center text-sm text-muted-foreground">
-                                        Selected: <span className="font-semibold" style={{ color: getPressureColor(pressure) }}>
+                                        Selected: <span className="font-semibold text-white">
                                             {pressure === 1 ? 'Very Light' : pressure === 2 ? 'Light' : pressure === 3 ? 'Medium' : pressure === 4 ? 'Firm' : 'Deep Tissue'}
                                         </span>
                                     </p>
