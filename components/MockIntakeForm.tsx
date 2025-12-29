@@ -117,47 +117,52 @@ export function MockIntakeForm() {
 
                             <div className="space-y-2">
                                 <label className="text-sm font-medium">Massage Pressure Preference</label>
-                                <div className="space-y-4 p-4 rounded-lg border border-input bg-background/50">
-                                    <div className="relative h-2 rounded-full overflow-hidden">
-                                        {/* Background track */}
-                                        <div className="absolute inset-0 bg-white/10" />
+                                <div className="space-y-4 p-6 rounded-lg border border-input bg-background/50">
+                                    {/* Labels above slider */}
+                                    <div className="flex justify-between text-sm text-muted-foreground">
+                                        <span>Light</span>
+                                        <span>Medium</span>
+                                        <span>Deep</span>
+                                    </div>
 
-                                        {/* Filled portion */}
+                                    {/* Slider track and knob */}
+                                    <div className="relative py-2">
+                                        <div className="relative h-3 rounded-full overflow-hidden bg-white/10">
+                                            {/* Filled portion */}
+                                            <div
+                                                className="absolute left-0 top-0 h-full transition-all duration-200 bg-emerald-500"
+                                                style={{
+                                                    width: `${((pressure - 1) / 4) * 100}%`,
+                                                }}
+                                            />
+                                        </div>
+
+                                        {/* Knob */}
                                         <div
-                                            className="absolute left-0 top-0 h-full transition-all duration-300 bg-emerald-500/60"
+                                            className="absolute top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white border-3 border-emerald-500 shadow-lg transition-all duration-200 pointer-events-none"
                                             style={{
-                                                width: `${((pressure - 1) / 4) * 100}%`,
+                                                left: `calc(${((pressure - 1) / 4) * 100}% - 14px)`,
                                             }}
                                         />
 
-                                        {/* Actual input (invisible but functional) */}
+                                        {/* Actual input */}
                                         <input
                                             type="range"
                                             min="1"
                                             max="5"
                                             value={pressure}
                                             onChange={(e) => setPressure(Number(e.target.value))}
-                                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                                            style={{ WebkitAppearance: 'none' }}
-                                        />
-                                    </div>
-
-                                    {/* Visible custom thumb */}
-                                    <div className="relative -mt-5 pointer-events-none">
-                                        <div
-                                            className="absolute w-6 h-6 rounded-full bg-white border-2 border-emerald-500 transition-all duration-300 shadow-lg"
+                                            className="absolute inset-0 w-full opacity-0 cursor-pointer"
                                             style={{
-                                                left: `calc(${((pressure - 1) / 4) * 100}% - 12px)`,
-                                                top: '-4px',
+                                                WebkitAppearance: 'none',
+                                                touchAction: 'none',
+                                                height: '40px',
+                                                top: '-12px',
                                             }}
                                         />
                                     </div>
 
-                                    <div className="flex justify-between text-xs text-muted-foreground pt-1">
-                                        <span>Light</span>
-                                        <span>Medium</span>
-                                        <span>Deep</span>
-                                    </div>
+                                    {/* Selected value */}
                                     <p className="text-center text-sm text-muted-foreground">
                                         Selected: <span className="font-semibold text-white">
                                             {pressure === 1 ? 'Very Light' : pressure === 2 ? 'Light' : pressure === 3 ? 'Medium' : pressure === 4 ? 'Firm' : 'Deep Tissue'}
