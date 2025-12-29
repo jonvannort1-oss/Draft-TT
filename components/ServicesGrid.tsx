@@ -25,7 +25,7 @@ const services = [
 export function ServicesGrid() {
     return (
         <section className="py-20 bg-black/20">
-            <div className="container px-4 mx-auto">
+            <div className="container px-4 sm:px-6 mx-auto">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold mb-4">Everything You Need to Grow</h2>
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -33,7 +33,7 @@ export function ServicesGrid() {
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto px-2 sm:px-0">
                     {services.map((service, index) => (
                         <motion.div
                             key={index}
