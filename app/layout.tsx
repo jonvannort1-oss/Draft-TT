@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Caveat } from "next/font/google";
+import { Suspense } from "react";
+import { MetaPixel } from "@/components/MetaPixel";
 import "./globals.css";
 
 const inter = Inter({
@@ -104,6 +106,9 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${caveat.variable} antialiased`}
       >
+        <Suspense fallback={null}>
+          <MetaPixel pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID || ''} />
+        </Suspense>
         {children}
       </body>
     </html>
